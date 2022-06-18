@@ -18,9 +18,9 @@ type inputToUpdate = {
 type joinType = "INNER" | "LEFT" | "RIGHT" | "FULL";
 type orderType = "ASC" | "DESC";
 
-class StudentCtl extends AuthBase {
+class UsersCtl extends AuthBase {
 	constructor() {
-		super("student");
+		super("users");
 	}
 
 	public statements(
@@ -44,7 +44,7 @@ class StudentCtl extends AuthBase {
 			let joinStatement = [`SELECT * FROM ${table[0]}`];
 			for (let i = 1; i <= join.length; i++) {
 				if (
-					(this.tableAuthorize["student"].includes(
+					(this.tableAuthorize["users"].includes(
 							table[i - 1]
 						))) {
 					joinStatement.push(
@@ -74,7 +74,7 @@ class StudentCtl extends AuthBase {
 			}
 			return (queryStatement = { text: joinStatement.join(" ") });
 		} else if (
-			(this.tableAuthorize["student"].includes(table[0]))
+			(this.tableAuthorize["users"].includes(table[0]))
 		) {
 			switch (action.toUpperCase()) {
 				case "SELECT": {
@@ -160,4 +160,4 @@ class StudentCtl extends AuthBase {
 			return await this.pool[0].query(statement);
 	}
 }
-export const studentQueryCtl = new StudentCtl();
+export const studentQueryCtl = new UsersCtl();
