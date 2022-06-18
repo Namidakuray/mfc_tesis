@@ -1,7 +1,7 @@
 require("dotenv").config();
 import express, {Application, Request, Response} from 'express';
 import { graphqlHTTP } from "express-graphql";
-import { studentAuthenticate, intranetAuthenticate } from './middleware/auth';
+import { usersAuthenticate, intranetAuthenticate } from './middleware/auth';
 
 
 export class App{
@@ -28,7 +28,7 @@ export class App{
         this._app.use(express.urlencoded({extended:false}));
         this._app.use(express.json());
         this._app.use("/api/intranet/graphql",intranetAuthenticate);
-        this._app.use("/api/student/graphql",studentAuthenticate);
+        this._app.use("/api/users/graphql",usersAuthenticate);
     }
     /* Routes */
     private routes(){
@@ -39,9 +39,9 @@ export class App{
                 context:{req,res}
             }
         }));
-        this._app.use("/api/student/graphql",graphqlHTTP((req,res)=>{
+        this._app.use("/api/users/graphql",graphqlHTTP((req,res)=>{
             return {
-                schema:require("./graphql/student/schema"),
+                schema:require("./graphql/users/schema"),
                 graphiql:true,
                 context:{req,res}
             }
