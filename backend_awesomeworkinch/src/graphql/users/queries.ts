@@ -1,6 +1,6 @@
 import { GraphQLInt, GraphQLList, GraphQLNonNull, GraphQLString } from "graphql";
 import { intranetQueryCtl } from "../../db/intranetCtl";
-import {studentQueryCtl, inputDataType} from '../../db/studentCtl';
+import {studentQueryCtl, inputDataType} from '../../db/usersCtl';
 import { comparePassword, generateToken } from "../../utils/tools";
 const {     
     EeType,
