@@ -1,0 +1,9 @@
+*/dist
+*/node_modules
+*/*/.env
+*/.env
+.env
+*/.gitignore
+*/package-lock.json
+*/*/Dockerfile
+*/Dockerfile

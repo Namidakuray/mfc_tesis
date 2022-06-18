@@ -1,0 +1,72 @@
+version: '3'
+services: 
+  postgresql_db:
+    build: ./database_awesomeworkinch/postgresql/
+    volumes:
+      - postgresql_data:/bitnami/postgresql
+    env_file:
+      - ./database_awesomeworkinch/postgresql/.env
+    environment:
+      - MODE_ENV=development
+    networks:
+      awesome_network:
+        aliases:
+          - postgresql
+  mongo_db:
+    build: ./database_awesomeworkinch/mongodb/
+    volumes:
+      - mongodb_data:/bitnami/mongodb
+    env_file:
+      - ./database_awesomeworkinch/mongodb/.env
+    environment:
+      - MODE_ENV=development
+    networks:
+      awesome_network:
+        aliases:
+          - mongodb
+
+  awesome-backend:
+    build: ./backend_awesomeworkinch/
+    command: 'npm test'
+    volumes:
+      - ./backend_awesomeworkinch:/app
+    env_file:
+      - ./backend_awesomeworkinch/.env
+    environment:  
+      - NODE_ENV=development
+    networks:
+      awesome_network:
+        aliases:
+          - backend
+    depends_on:
+      - postgresql_db
+      - mongo_db
+
+  awesome-frontend:
+    build: ./frontend_awesomeworkinch/
+    command: 'npm run dev'
+    volumes:
+      - ./frontend_awesomeworkinch/:/app
+    ports:
+      - 4200:5000
+    environment:  
+      - NODE_ENV=development
+    networks:
+      awesome_network:
+        aliases:
+          - frontend
+    depends_on:
+      - backend
+
+networks:
+  awesome_network:
+    name: general_network
+    driver: bridge
+    ipam:
+      driver: default
+
+volumes:
+  postgresql_data:
+    driver: local
+  mongodb_data:
+    driver: local
