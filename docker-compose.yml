@@ -27,7 +27,7 @@ services:
 
   awesome-backend:
     build: ./backend_awesomeworkinch/
-    command: 'npm test'
+    command: 'sleep infinity'
     volumes:
       - ./backend_awesomeworkinch:/app
     env_file:
@@ -48,7 +48,7 @@ services:
     volumes:
       - ./frontend_awesomeworkinch/:/app
     ports:
-      - 4200:5000
+      - 3000:3000
     environment:  
       - NODE_ENV=development
     networks:
