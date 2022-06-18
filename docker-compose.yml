@@ -56,7 +56,7 @@ services:
         aliases:
           - frontend
     depends_on:
-      - backend
+      - awesome-backend
 
 networks:
   awesome_network:
