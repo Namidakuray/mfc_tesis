@@ -26,7 +26,7 @@ const addEeType = {
     },
     resolve: async(_:null,args:any) => {
         let data:inputDataType = {
-            db: "student_support",
+            db: "users_db",
             columns:Object.keys(args),
             values: Object.values(args).toString().split(",")
         };
@@ -50,7 +50,7 @@ const updateEeType = {
         let id=args.id;
         delete args.id;
         let data:inputDataType = {
-            db: "student_support",
+            db: "users_db",
             columns:Object.keys(args),
             values: Object.values(args).toString().split(",")
         };
@@ -71,8 +71,8 @@ const deleteEeType = {
     },
     resolve: async(_:null,args:inputDataType) => {
         try {
-            let queryStatement = intranetQueryCtl.statements("DELETE","student_support", ["ee_type"],args.id);
-            let resp= await intranetQueryCtl.poolQuery(queryStatement, "student_support");
+            let queryStatement = intranetQueryCtl.statements("DELETE","users_db", ["ee_type"],args.id);
+            let resp= await intranetQueryCtl.poolQuery(queryStatement, "users_db");
             return resp.rows[0];
         } catch (error) {
             return error;
@@ -89,7 +89,7 @@ const addMainOfice = {
     },
     resolve: async(_:null,args:inputDataType) => {
         let data:inputDataType = {
-            db: "student_support",
+            db: "users_db",
             columns:Object.keys(args),
             values: Object.values(args).toString().split(",")
         };
@@ -115,7 +115,7 @@ const updateMainOfice = {
         let id=args.id;
         delete args.id;
         let data:inputDataType = {
-            db: "student_support",
+            db: "users_db",
             columns:Object.keys(args),
             values: Object.values(args).toString().split(",")
         };
@@ -136,8 +136,8 @@ const deleteMainOfice = {
     },
     resolve: async(_:null,args:inputDataType) => {
         try {
-            let queryStatement = intranetQueryCtl.statements("DELETE","student_support", ["main_office"],args.id);
-            let resp= await intranetQueryCtl.poolQuery(queryStatement, "student_support");
+            let queryStatement = intranetQueryCtl.statements("DELETE","users_db", ["main_office"],args.id);
+            let resp= await intranetQueryCtl.poolQuery(queryStatement, "users_db");
             return resp.rows[0];
         } catch (error) {
             return error;
@@ -155,7 +155,7 @@ const addSedeAddress = {
     },
     resolve: async(_:null,args:any) => {
         let data:inputDataType = {
-            db: "student_support",
+            db: "users_db",
             columns:Object.keys(args),
             values: Object.values(args).toString().split(",")
         };
@@ -182,7 +182,7 @@ const updateSedeAddress = {
         let id=args.id;
         delete args.id;
         let data:inputDataType = {
-            db: "student_support",
+            db: "users_db",
             columns:Object.keys(args),
             values: Object.values(args).toString().split(",")
         };
@@ -203,8 +203,8 @@ const deleteSedeAddress = {
     },
     resolve: async(_:null,args:inputDataType) => {
         try {
-            let queryStatement = intranetQueryCtl.statements("DELETE","student_support", ["sede_address"],args.id);
-            let resp= await intranetQueryCtl.poolQuery(queryStatement, "student_support");
+            let queryStatement = intranetQueryCtl.statements("DELETE","users_db", ["sede_address"],args.id);
+            let resp= await intranetQueryCtl.poolQuery(queryStatement, "users_db");
             return resp.rows[0];
         } catch (error) {
             return error;
@@ -220,7 +220,7 @@ const addSede = {
     },
     resolve: async(_:null,args:any) => {
         let data:inputDataType = {
-            db: "student_support",
+            db: "users_db",
             columns:Object.keys(args),
             values: Object.values(args).toString().split(",")
         };
@@ -245,7 +245,7 @@ const updateSede = {
         let id=args.id;
         delete args.id;
         let data:inputDataType = {
-            db: "student_support",
+            db: "users_db",
             columns:Object.keys(args),
             values: Object.values(args).toString().split(",")
         };
@@ -266,8 +266,8 @@ const deleteSede = {
     },
     resolve: async(_:null,args:inputDataType) => {
         try {
-            let queryStatement = intranetQueryCtl.statements("DELETE","student_support", ["sede"],args.id);
-            let resp= await intranetQueryCtl.poolQuery(queryStatement, "student_support");
+            let queryStatement = intranetQueryCtl.statements("DELETE","users_db", ["sede"],args.id);
+            let resp= await intranetQueryCtl.poolQuery(queryStatement, "users_db");
             return resp.rows[0];
         } catch (error) {
             return error;
@@ -284,7 +284,7 @@ const addStudentFederation = {
     },
     resolve: async(_:null,args:any) => {
         let data:inputDataType = {
-            db: "student_support",
+            db: "users_db",
             columns:Object.keys(args),
             values: Object.values(args).toString().split(",")
         };
@@ -310,7 +310,7 @@ const updateStudentFederation = {
         let id=args.id;
         delete args.id;
         let data:inputDataType = {
-            db: "student_support",
+            db: "users_db",
             columns:Object.keys(args),
             values: Object.values(args).toString().split(",")
         };
@@ -331,8 +331,8 @@ const deleteStudentFederation = {
     },
     resolve: async(_:null,args:inputDataType) => {
         try {
-            let queryStatement = intranetQueryCtl.statements("DELETE","student_support", ["student_federation"],args.id);
-            let resp= await intranetQueryCtl.poolQuery(queryStatement, "student_support");
+            let queryStatement = intranetQueryCtl.statements("DELETE","users_db", ["student_federation"],args.id);
+            let resp= await intranetQueryCtl.poolQuery(queryStatement, "users_db");
             return resp.rows[0];
         } catch (error) {
             return error;
@@ -348,7 +348,7 @@ const addFaculty = {
     },
     resolve: async(_:null,args:any) => {
         let data:inputDataType = {
-            db: "student_support",
+            db: "users_db",
             columns:Object.keys(args),
             values: Object.values(args).toString().split(",")
         };
@@ -373,7 +373,7 @@ const updateFaculty = {
         let id=args.id;
         delete args.id;
         let data:inputDataType = {
-            db: "student_support",
+            db: "users_db",
             columns:Object.keys(args),
             values: Object.values(args).toString().split(",")
         };
@@ -394,8 +394,8 @@ const deleteFaculty = {
     },
     resolve: async(_:null,args:inputDataType) => {
         try {
-            let queryStatement = intranetQueryCtl.statements("DELETE","student_support", ["faculty"],args.id);
-            let resp= await intranetQueryCtl.poolQuery(queryStatement, "student_support");
+            let queryStatement = intranetQueryCtl.statements("DELETE","users_db", ["faculty"],args.id);
+            let resp= await intranetQueryCtl.poolQuery(queryStatement, "users_db");
             return resp.rows[0];
         } catch (error) {
             return error;
@@ -411,7 +411,7 @@ const addCareer = {
     },
     resolve: async(_:null,args:any) => {
         let data:inputDataType = {
-            db: "student_support",
+            db: "users_db",
             columns:Object.keys(args),
             values: Object.values(args).toString().split(",")
         };
@@ -436,7 +436,7 @@ const updateCareer = {
         let id=args.id;
         delete args.id;
         let data:inputDataType = {
-            db: "student_support",
+            db: "users_db",
             columns:Object.keys(args),
             values: Object.values(args).toString().split(",")
         };
@@ -457,8 +457,8 @@ const deleteCareer = {
     },
     resolve: async(_:null,args:inputDataType) => {
         try {
-            let queryStatement = intranetQueryCtl.statements("DELETE","student_support", ["career"],args.id);
-            let resp= await intranetQueryCtl.poolQuery(queryStatement, "student_support");
+            let queryStatement = intranetQueryCtl.statements("DELETE","users_db", ["career"],args.id);
+            let resp= await intranetQueryCtl.poolQuery(queryStatement, "users_db");
             return resp.rows[0];
         } catch (error) {
             return error;
@@ -475,7 +475,7 @@ const addStudentCenter = {
     },
     resolve: async(_:null,args:any) => {
         let data:inputDataType = {
-            db: "student_support",
+            db: "users_db",
             columns:Object.keys(args),
             values: Object.values(args).toString().split(",")
         };
@@ -501,7 +501,7 @@ const updateStudentCenter = {
         let id=args.id;
         delete args.id;
         let data:inputDataType = {
-            db: "student_support",
+            db: "users_db",
             columns:Object.keys(args),
             values: Object.values(args).toString().split(",")
         };
@@ -522,8 +522,8 @@ const deleteStudentCenter = {
     },
     resolve: async(_:null,args:inputDataType) => {
         try {
-            let queryStatement = intranetQueryCtl.statements("DELETE","student_support", ["student_center"],args.id);
-            let resp= await intranetQueryCtl.poolQuery(queryStatement, "student_support");
+            let queryStatement = intranetQueryCtl.statements("DELETE","users_db", ["student_center"],args.id);
+            let resp= await intranetQueryCtl.poolQuery(queryStatement, "users_db");
             return resp.rows[0];
         } catch (error) {
             return error;
@@ -540,7 +540,7 @@ const addEducationEntity = {
     },
     resolve: async(_:null,args:any) => {
         let data:inputDataType = {
-            db: "student_support",
+            db: "users_db",
             columns:Object.keys(args),
             values: Object.values(args).toString().split(",")
         };
@@ -566,7 +566,7 @@ const updateEducationEntity = {
         let id=args.id;
         delete args.id;
         let data:inputDataType = {
-            db: "student_support",
+            db: "users_db",
             columns:Object.keys(args),
             values: Object.values(args).toString().split(",")
         };
@@ -587,8 +587,8 @@ const deleteEducationEntity = {
     },
     resolve: async(_:null,args:inputDataType) => {
         try {
-            let queryStatement = intranetQueryCtl.statements("DELETE","student_support", ["education_entity"],args.id);
-            let resp= await intranetQueryCtl.poolQuery(queryStatement, "student_support");
+            let queryStatement = intranetQueryCtl.statements("DELETE","users_db", ["education_entity"],args.id);
+            let resp= await intranetQueryCtl.poolQuery(queryStatement, "users_db");
             return resp.rows[0];
         } catch (error) {
             return error;
@@ -603,7 +603,7 @@ const addDisabilityType = {
     },
     resolve: async(_:null,args:any) => {
         let data:inputDataType = {
-            db: "student_support",
+            db: "users_db",
             columns:Object.keys(args),
             values: Object.values(args).toString().split(",")
         };
@@ -627,7 +627,7 @@ const updateDisabilityType = {
         let id=args.id;
         delete args.id;
         let data:inputDataType = {
-            db: "student_support",
+            db: "users_db",
             columns:Object.keys(args),
             values: Object.values(args).toString().split(",")
         };
@@ -648,8 +648,8 @@ const deleteDisabilityType = {
     },
     resolve: async(_:null,args:inputDataType) => {
         try {
-            let queryStatement = intranetQueryCtl.statements("DELETE","student_support", ["disability_type"],args.id);
-            let resp= await intranetQueryCtl.poolQuery(queryStatement, "student_support");
+            let queryStatement = intranetQueryCtl.statements("DELETE","users_db", ["disability_type"],args.id);
+            let resp= await intranetQueryCtl.poolQuery(queryStatement, "users_db");
             return resp.rows[0];
         } catch (error) {
             return error;
@@ -665,7 +665,7 @@ const addDisabilityDetail = {
     },
     resolve: async(_:null,args:any) => {
         let data:inputDataType = {
-            db: "student_support",
+            db: "users_db",
             columns:Object.keys(args),
             values: Object.values(args).toString().split(",")
         };
@@ -690,7 +690,7 @@ const updateDisabilityDetail = {
         let id=args.id;
         delete args.id;
         let data:inputDataType = {
-            db: "student_support",
+            db: "users_db",
             columns:Object.keys(args),
             values: Object.values(args).toString().split(",")
         };
@@ -711,8 +711,8 @@ const deleteDisabilityDetail = {
     },
     resolve: async(_:null,args:inputDataType) => {
         try {
-            let queryStatement = intranetQueryCtl.statements("DELETE","student_support", ["disability_detail"],args.id);
-            let resp= await intranetQueryCtl.poolQuery(queryStatement, "student_support");
+            let queryStatement = intranetQueryCtl.statements("DELETE","users_db", ["disability_detail"],args.id);
+            let resp= await intranetQueryCtl.poolQuery(queryStatement, "users_db");
             return resp.rows[0];
         } catch (error) {
             return error;
@@ -727,7 +727,7 @@ const addGenderIdentity = {
     },
     resolve: async(_:null,args:any) => {
         let data:inputDataType = {
-            db: "student_support",
+            db: "users_db",
             columns:Object.keys(args),
             values: Object.values(args).toString().split(",")
         };
@@ -751,7 +751,7 @@ const updateGenderIdentity = {
         let id=args.id;
         delete args.id;
         let data:inputDataType = {
-            db: "student_support",
+            db: "users_db",
             columns:Object.keys(args),
             values: Object.values(args).toString().split(",")
         };
@@ -772,8 +772,8 @@ const deleteGenderIdentity = {
     },
     resolve: async(_:null,args:inputDataType) => {
         try {
-            let queryStatement = intranetQueryCtl.statements("DELETE","student_support", ["gender_identity"],args.id);
-            let resp= await intranetQueryCtl.poolQuery(queryStatement, "student_support");
+            let queryStatement = intranetQueryCtl.statements("DELETE","users_db", ["gender_identity"],args.id);
+            let resp= await intranetQueryCtl.poolQuery(queryStatement, "users_db");
             return resp.rows[0];
         } catch (error) {
             return error;
@@ -791,7 +791,7 @@ const addStudentAddress = {
     },
     resolve: async(_:null,args:any) => {
         let data:inputDataType = {
-            db: "student_support",
+            db: "users_db",
             columns:Object.keys(args),
             values: Object.values(args).toString().split(",")
         };
@@ -818,7 +818,7 @@ const updateStudentAddress = {
         let id=args.id;
         delete args.id;
         let data:inputDataType = {
-            db: "student_support",
+            db: "users_db",
             columns:Object.keys(args),
             values: Object.values(args).toString().split(",")
         };
@@ -839,8 +839,8 @@ const deleteStudentAddress = {
     },
     resolve: async(_:null,args:inputDataType) => {
         try {
-            let queryStatement = intranetQueryCtl.statements("DELETE","student_support", ["student_address"],args.id);
-            let resp= await intranetQueryCtl.poolQuery(queryStatement, "student_support");
+            let queryStatement = intranetQueryCtl.statements("DELETE","users_db", ["student_address"],args.id);
+            let resp= await intranetQueryCtl.poolQuery(queryStatement, "users_db");
             return resp.rows[0];
         } catch (error) {
             return error;
@@ -868,7 +868,7 @@ const addStudent = {
     resolve: async(_:null,args:any) => {
         args.password=await encPassword(args.password);
         let data:inputDataType = {
-            db: "student_support",
+            db: "users_db",
             columns:Object.keys(args),
             values: Object.values(args).toString().split(",")
         };
@@ -903,8 +903,8 @@ const updateStudent = {
     },
     resolve: async(_:null,args:any) => {
         try {
-            let queryStatement = intranetQueryCtl.statements("SELECT","student_support", ["student"],args.id);
-            let resp= await intranetQueryCtl.poolQuery(queryStatement,"student_support");
+            let queryStatement = intranetQueryCtl.statements("SELECT","users_db", ["student"],args.id);
+            let resp= await intranetQueryCtl.poolQuery(queryStatement,"users_db");
             if(resp.rows.length==0){throw new Error("The petition has not been executed")}
             let hash= resp.rows[0].password;
             const isMatch = await comparePassword(args.lastPassword, hash);
@@ -917,7 +917,7 @@ const updateStudent = {
         let id=args.id;
         delete args.id;
         let data:inputDataType = {
-            db: "student_support",
+            db: "users_db",
             columns:Object.keys(args),
             values: Object.values(args).toString().split(",")
         };
@@ -938,8 +938,8 @@ const deleteStudent = {
     },
     resolve: async(_:null,args:inputDataType) => {
         try {
-            let queryStatement = intranetQueryCtl.statements("DELETE","student_support", ["student"],args.id);
-            let resp= await intranetQueryCtl.poolQuery(queryStatement, "student_support");
+            let queryStatement = intranetQueryCtl.statements("DELETE","users_db", ["student"],args.id);
+            let resp= await intranetQueryCtl.poolQuery(queryStatement, "users_db");
             return resp.rows[0];
         } catch (error) {
             return error;

@@ -1,9 +1,9 @@
 import { Pool } from "pg";
 const { SingletonIntranet, SingletonClient } = require("./poolConnect");
 
-type authorizeType = "student" | "intranet";
+type authorizeType = "users" | "intranet";
 type poolAuthorizeType = {
-	student: Array<string>;
+	users: Array<string>;
 	intranet?: Array<string>;
 };
 
@@ -16,71 +16,59 @@ export class AuthBase {
 		this.authorizeType = authorizeType;
 		this.pool = [];
 		switch (this.authorizeType) {
-			case "student":
+			case "users":
 				{
 					this.tableAuthorize = {
-						student: [
-							"ee_type",
-							"education_entity",
+						users: [
+							"allow",
+							"rol",
+							"allow_rol",
 							"country",
 							"region",
 							"city",
-							"main_office",
-							"sede",
-							"student_federation",
-							"faculty",
-							"career",
-							"student_center",
-							"sede_address",
-							"allow",
-							"rol",
-							"disability_type",
-							"disability_detail",
-							"gender_identity",
-							"student",
-							"student_address",
+							"address",
+							"company",
+							"sucursal",
+							"users",
+							"rol_user"
 						],
 					};
-					let studentPool = new SingletonClient.getInstance();
-					this.pool.push(studentPool);
+					let usersPool = new SingletonClient.getInstance();
+					this.pool.push(usersPool);
 				}
 				break;
 			case "intranet": {
 				this.tableAuthorize = {
-					student: [
-						"ee_type",
-						"education_entity",
+					users: [
+						"allow",
+						"rol",
+						"allow_rol",
 						"country",
 						"region",
 						"city",
-						"main_office",
-						"sede",
-						"student_federation",
-						"faculty",
-						"career",
-						"student_center",
-						"sede_address",
-						"allow",
-						"rol",
-						"disability_type",
-						"disability_detail",
-						"gender_identity",
-						"student",
-						"student_address",
+						"address",
+						"company",
+						"sucursal",
+						"users",
+						"rol_user"
 					],
 					intranet: [
 						"allow",
 						"rol",
-						"intranet_user",
+						"allow_rol",
 						"country",
 						"region",
 						"city",
-						"user_address",
+						"address",
+						"company",
+						"sucursal",
+						"users",
+						"rol_user"
 					],
 				};
 				let intranetPool = new SingletonIntranet.getInstance();
-				let studentPool = new SingletonClient.getInstance();
-				this.pool.push(studentPool);
+				let usersPool = new SingletonClient.getInstance();
+				this.pool.push(usersPool);
 				this.pool.push(intranetPool);
 				break;
 			}
@@ -89,11 +77,8 @@ export class AuthBase {
 		}
 	}
 	protected async getColumns(table: string, dataBase:string): Promise<Array<string>> {
-		if(dataBase=="intranet"){
+		if(dataBase=="users_db"){
 			let result = await this.pool[1].query(`SELECT column_name FROM information_schema.columns WHERE table_name = '${table}'`);
-			return result.rows.map(e => e.column_name);
-		}else if(dataBase=="student_support"){
-			let result= await this.pool[0].query(`SELECT column_name FROM information_schema.columns WHERE table_name = '${table}'`);
 			return result.rows.map(e => e.column_name);
 		}else{
 			return ["error"];

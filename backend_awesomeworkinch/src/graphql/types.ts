@@ -300,11 +300,11 @@ const MainOfficeType: GraphQLObjectType = new GraphQLObjectType({
 				let res = await protectedPool.poolQuery(
 					protectedPool.statements(
 						"SELECT",
-						"student_support",
+						"users_db",
 						["city"],
 						parent.city_id
 					),
-					"student_support"
+					"users_db"
 				);
 				return res.rows[0];
 			},
@@ -325,11 +325,11 @@ const SedeAddressType: GraphQLObjectType = new GraphQLObjectType({
 				let res = await protectedPool.poolQuery(
 					protectedPool.statements(
 						"SELECT",
-						"student_support",
+						"users_db",
 						["city"],
 						parent.city_id
 					),
-					"student_support"
+					"users_db"
 				);
 				return res.rows[0];
 			},
@@ -349,11 +349,11 @@ const SedeType: GraphQLObjectType = new GraphQLObjectType({
 				let res = await protectedPool.poolQuery(
 					protectedPool.statements(
 						"SELECT",
-						"student_support",
+						"users_db",
 						["education_entity"],
 						parent.education_entity_id
 					),
-					"student_support"
+					"users_db"
 				);
 				return res.rows[0];
 			},
@@ -365,11 +365,11 @@ const SedeType: GraphQLObjectType = new GraphQLObjectType({
 				let res = await protectedPool.poolQuery(
 					protectedPool.statements(
 						"SELECT",
-						"student_support",
+						"users_db",
 						["student_federation", "sede"],
 						parent.id
 					),
-					"student_support"
+					"users_db"
 				);
 				return res.rows[0];
 			},
@@ -380,7 +380,7 @@ const SedeType: GraphQLObjectType = new GraphQLObjectType({
 			resolve: async (parent) => {
 				let state = protectedPool.statements(
 					"SELECT",
-					"student_support",
+					"users_db",
 					["faculty", "sede"],
 					parent.id,
 					undefined,
@@ -388,7 +388,7 @@ const SedeType: GraphQLObjectType = new GraphQLObjectType({
 				);
 				let res = await protectedPool.poolQuery(
 					state,
-					"student_support"
+					"users_db"
 				);
 				return res.rows;
 			},
@@ -400,11 +400,11 @@ const SedeType: GraphQLObjectType = new GraphQLObjectType({
 				let res = await protectedPool.poolQuery(
 					protectedPool.statements(
 						"SELECT",
-						"student_support",
+						"users_db",
 						["sede_address"],
 						parent.id
 					),
-					"student_support"
+					"users_db"
 				);
 				return res.rows[0];
 			},
@@ -425,11 +425,11 @@ const StudentFederationType: GraphQLObjectType = new GraphQLObjectType({
 				let res = await protectedPool.poolQuery(
 					protectedPool.statements(
 						"SELECT",
-						"student_support",
+						"users_db",
 						["sede"],
 						parent.sede_id
 					),
-					"student_support"
+					"users_db"
 				);
 				return res.rows[0];
 			},
@@ -449,11 +449,11 @@ const FacultyType: GraphQLObjectType = new GraphQLObjectType({
 				let res = await protectedPool.poolQuery(
 					protectedPool.statements(
 						"SELECT",
-						"student_support",
+						"users_db",
 						["sede"],
 						parent.sede_id
 					),
-					"student_support"
+					"users_db"
 				);
 				return res.rows[0];
 			},
@@ -464,7 +464,7 @@ const FacultyType: GraphQLObjectType = new GraphQLObjectType({
 			resolve: async (parent) => {
 				let state = protectedPool.statements(
 					"SELECT",
-					"student_support",
+					"users_db",
 					["career", "faculty"],
 					parent.id,
 					undefined,
@@ -472,7 +472,7 @@ const FacultyType: GraphQLObjectType = new GraphQLObjectType({
 				);
 				let res = await protectedPool.poolQuery(
 					state,
-					"student_support"
+					"users_db"
 				);
 				return res.rows;
 			},
@@ -492,11 +492,11 @@ const CareerType: GraphQLObjectType = new GraphQLObjectType({
 				let res = await protectedPool.poolQuery(
 					protectedPool.statements(
 						"SELECT",
-						"student_support",
+						"users_db",
 						["faculty"],
 						parent.faculty_id
 					),
-					"student_support"
+					"users_db"
 				);
 				return res.rows[0];
 			},
@@ -507,7 +507,7 @@ const CareerType: GraphQLObjectType = new GraphQLObjectType({
 			resolve: async (parent) => {
 				let state = protectedPool.statements(
 					"SELECT",
-					"student_support",
+					"users_db",
 					["student_center", "career"],
 					parent.id,
 					undefined,
@@ -515,7 +515,7 @@ const CareerType: GraphQLObjectType = new GraphQLObjectType({
 				);
 				let res = await protectedPool.poolQuery(
 					state,
-					"student_support"
+					"users_db"
 				);
 				return res.rows;
 			},
@@ -536,11 +536,11 @@ const StudentCenterType: GraphQLObjectType = new GraphQLObjectType({
 				let res = await protectedPool.poolQuery(
 					protectedPool.statements(
 						"SELECT",
-						"student_support",
+						"users_db",
 						["career"],
 						parent.career_id
 					),
-					"student_support"
+					"users_db"
 				);
 				return res.rows[0];
 			},
@@ -561,11 +561,11 @@ const EducationEntityType: GraphQLObjectType = new GraphQLObjectType({
 				let res = await protectedPool.poolQuery(
 					protectedPool.statements(
 						"SELECT",
-						"student_support",
+						"users_db",
 						["ee_type"],
 						parent.ee_type_id
 					),
-					"student_support"
+					"users_db"
 				);
 				return res.rows[0];
 			},
@@ -577,11 +577,11 @@ const EducationEntityType: GraphQLObjectType = new GraphQLObjectType({
 				let res = await protectedPool.poolQuery(
 					protectedPool.statements(
 						"SELECT",
-						"student_support",
+						"users_db",
 						["main_office"],
 						parent.id
 					),
-					"student_support"
+					"users_db"
 				);
 				return res.rows[0];
 			},
@@ -593,11 +593,11 @@ const EducationEntityType: GraphQLObjectType = new GraphQLObjectType({
 				let res = await protectedPool.poolQuery(
 					protectedPool.statements(
 						"SELECT",
-						"student_support",
+						"users_db",
 						["sede"],
 						parent.id
 					),
-					"student_support"
+					"users_db"
 				);
 				return res.rows;
 			},
@@ -609,11 +609,11 @@ const EducationEntityType: GraphQLObjectType = new GraphQLObjectType({
 				let res = await protectedPool.poolQuery(
 					protectedPool.statements(
 						"SELECT",
-						"student_support",
+						"users_db",
 						["student_federation", "sede", "education_entity"],
 						parent.id
 					),
-					"student_support"
+					"users_db"
 				);
 				return res.rows;
 			},
@@ -633,11 +633,11 @@ const DisabilityTypeType: GraphQLObjectType = new GraphQLObjectType({
 				let res = await protectedPool.poolQuery(
 					protectedPool.statements(
 						"SELECT",
-						"student_support",
+						"users_db",
 						["disability_detail", "disability_type"],
 						parent.id
 					),
-					"student_support"
+					"users_db"
 				);
 				return res.rows;
 			},
@@ -657,11 +657,11 @@ const DisabilityDetailType: GraphQLObjectType = new GraphQLObjectType({
 				let res = await protectedPool.poolQuery(
 					protectedPool.statements(
 						"SELECT",
-						"student_support",
+						"users_db",
 						["disability_type"],
 						parent.disability_type_id
 					),
-					"student_support"
+					"users_db"
 				);
 				return res.rows[0];
 			},
@@ -703,11 +703,11 @@ const StudentAddressType = new GraphQLObjectType({
 				let res = await protectedPool.poolQuery(
 					protectedPool.statements(
 						"SELECT",
-						"student_support",
+						"users_db",
 						["city"],
 						parent.city_id
 					),
-					"student_support"
+					"users_db"
 				);
 				return res.rows[0];
 			},
@@ -736,11 +736,11 @@ const StudentType: GraphQLObjectType = new GraphQLObjectType({
 				let res = await protectedPool.poolQuery(
 					protectedPool.statements(
 						"SELECT",
-						"student_support",
+						"users_db",
 						["career"],
 						parent.career_id
 					),
-					"student_support"
+					"users_db"
 				);
 				return res.rows[0];
 			},
@@ -752,11 +752,11 @@ const StudentType: GraphQLObjectType = new GraphQLObjectType({
 				let res = await protectedPool.poolQuery(
 					protectedPool.statements(
 						"SELECT",
-						"student_support",
+						"users_db",
 						["rol"],
 						parent.rol_id
 					),
-					"student_support"
+					"users_db"
 				);
 				return res.rows[0];
 			},
@@ -768,11 +768,11 @@ const StudentType: GraphQLObjectType = new GraphQLObjectType({
 				let res = await protectedPool.poolQuery(
 					protectedPool.statements(
 						"SELECT",
-						"student_support",
+						"users_db",
 						["disability_detail"],
 						parent.disability_detail_id
 					),
-					"student_support"
+					"users_db"
 				);
 				return res.rows[0];
 			},
@@ -784,11 +784,11 @@ const StudentType: GraphQLObjectType = new GraphQLObjectType({
 				let res = await protectedPool.poolQuery(
 					protectedPool.statements(
 						"SELECT",
-						"student_support",
+						"users_db",
 						["gender_identity"],
 						parent.gender_identity_id
 					),
-					"student_support"
+					"users_db"
 				);
 				return res.rows[0];
 			},
@@ -800,13 +800,13 @@ const StudentType: GraphQLObjectType = new GraphQLObjectType({
 				let res = await protectedPool.poolQuery(
 					protectedPool.statements(
 						"SELECT",
-						"student_support",
+						"users_db",
 						["student_address","student"],
 						parent.id,
                         undefined,
                         ["INNER"]
 					),
-					"student_support"
+					"users_db"
 				);
 				return res.rows[0];
 			},

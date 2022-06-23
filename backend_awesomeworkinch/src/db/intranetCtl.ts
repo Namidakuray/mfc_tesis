@@ -8,7 +8,7 @@ type queryStatement = {
 	name?: string;
 	values?: Array<any>;
 };
-type dbType = "intranet" | "student_support";
+type dbType = "intranet" | "users_db";
 export type inputDataType = {
 	db: dbType;
 	values?: Array<string|number>;
@@ -49,12 +49,8 @@ class IntranetCtl extends AuthBase {
 			let joinStatement = [`SELECT * FROM ${table[0]}`];
 			for (let i = 1; i <= join.length; i++) {
 				if (
-					(db === "student_support" &&
-						this.tableAuthorize["student"].includes(
-							table[i - 1]
-						)) ||
-					(db === "intranet" &&
-						this.tableAuthorize["intranet"]?.includes(table[i - 1]))
+					(this.tableAuthorize["users"].includes(table[i - 1])) ||
+					(this.tableAuthorize["intranet"]?.includes(table[i - 1]))
 				) {
 					joinStatement.push(
 						`${join[i - 1]} JOIN ${table[i]} ON ${
@@ -84,10 +80,8 @@ class IntranetCtl extends AuthBase {
 			queryStatement = { text: joinStatement.join(" ") };
 			return queryStatement;
 		} else if (
-			(db == "student_support" &&
-				this.tableAuthorize["student"].includes(table[0])) ||
-			(db == "intranet" &&
-				this.tableAuthorize["intranet"]?.includes(table[0]))
+			(this.tableAuthorize["users"].includes(table[0])) ||
+			(this.tableAuthorize["intranet"]?.includes(table[0]))
 		) {
 			switch (action.toUpperCase()) {
 				case "SELECT": {
@@ -171,7 +165,7 @@ class IntranetCtl extends AuthBase {
 		statement: queryStatement,
 		db: dbType
 	): Promise<any> {
-		if (db === "student_support") {
+		if (db === "users_db") {
 			return await this.pool[0].query(statement);
 		}
 		if (db === "intranet") {

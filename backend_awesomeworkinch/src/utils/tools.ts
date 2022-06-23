@@ -1,7 +1,7 @@
 require('dotenv').config();
 import bcrypt from 'bcryptjs';
 import jwt, { JwtPayload } from 'jsonwebtoken';
-export type InputDataStudentType = {
+export type InputDataUsersType = {
     id: string,
     career_id: string,
     rol_id: string,
@@ -18,7 +18,7 @@ export type InputDataIntranetType = {
     maternal_lname: string,
     rol_id: string,
 }
-type UserType= "student" | "intranet";
+type UserType= "users" | "intranet";
 
 const arrAlphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;\:,./<>?~'.split('');
 const arrAlphabetLength = arrAlphabet.length;
@@ -34,9 +34,9 @@ export const comparePassword = async (password: string, hash: string): Promise<b
     return await bcrypt.compare(passToHash, hash);
 };
 
-export const generateToken = (userType: UserType,data: InputDataStudentType|InputDataIntranetType): string => {
-    if(userType=="student"){
-        return jwt.sign({ data }, process.env.JWT_STUDENT_SECRET || "test", {
+export const generateToken = (userType: UserType,data: InputDataUsersType|InputDataIntranetType): string => {
+    if(userType=="users"){
+        return jwt.sign({ data }, process.env.JWT_USERS_SECRET || "test", {
             expiresIn: "1d"
         });
     } else if(userType=="intranet"){
@@ -47,8 +47,8 @@ export const generateToken = (userType: UserType,data: InputDataStudentType|Inpu
 };
 export const validateToken = (userType:UserType,token: string): string|JwtPayload => {
     try {
-        if(userType=="student"){
-            return jwt.verify(token, process.env.JWT_STUDENT_SECRET || "test");
+        if(userType=="users"){
+            return jwt.verify(token, process.env.JWT_USERS_SECRET || "test");
         }else if(userType=="intranet"){
             return jwt.verify(token, process.env.JWT_INTRANET_SECRET || "test");
         }else{throw new Error("Invalid user type")};
@@ -65,6 +65,6 @@ export const validateToken = (userType:UserType,token: string): string|JwtPayloa
 }
 test('123456789'); */
 
-/* let a=generateToken("student",{id:"1",career_id:"1",rol_id:"1",name:"test",paternal_lname:"test",maternal_lname:"test",experience:"test",created_at:"test"});
-let b=validateToken("student",a);
+/* let a=generateToken("Users",{id:"1",career_id:"1",rol_id:"1",name:"test",paternal_lname:"test",maternal_lname:"test",experience:"test",created_at:"test"});
+let b=validateToken("Users",a);
 console.log(b); */

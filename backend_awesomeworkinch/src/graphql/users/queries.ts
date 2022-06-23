@@ -1,6 +1,6 @@
 import { GraphQLInt, GraphQLList, GraphQLNonNull, GraphQLString } from "graphql";
 import { intranetQueryCtl } from "../../db/intranetCtl";
-import {studentQueryCtl, inputDataType} from '../../db/studentCtl';
+import {studentQueryCtl, inputDataType} from '../../db/usersCtl';
 import { comparePassword, generateToken } from "../../utils/tools";
 const {     
     EeType,
@@ -36,7 +36,7 @@ const logginStudent = {
                 const isMatch = await comparePassword(args.password, hash);
                 if(!isMatch){throw new Error("The password is incorrect")}
                 let {id,career_id,rol_id,name,paternal_lname,maternal_lname,experience,created_at}=resp.rows[0];
-                let token=generateToken("student",{id,career_id,rol_id,name,paternal_lname,maternal_lname,experience,created_at});
+                let token=generateToken("users",{id,career_id,rol_id,name,paternal_lname,maternal_lname,experience,created_at});
                 return token;
             } catch (error) {
                 return `${error}`;

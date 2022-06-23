@@ -22,8 +22,8 @@ const eeTypes = {
     description: "returns the eetypes list",
     resolve: async() => {
         try {
-            let queryStatement = intranetQueryCtl.statements("SELECT","student_support", ["ee_type"]);
-            let resp= await intranetQueryCtl.poolQuery(queryStatement,"student_support");
+            let queryStatement = intranetQueryCtl.statements("SELECT","users_db", ["ee_type"]);
+            let resp= await intranetQueryCtl.poolQuery(queryStatement,"users_db");
             return resp.rows;
         } catch (error) {
             return error;
@@ -38,8 +38,8 @@ const eeTypesById = {
     },
     resolve: async(_:null,args:inputDataType) => {
         try {
-            let queryStatement = intranetQueryCtl.statements("SELECT","student_support", ["ee_type"],args.id);
-            let resp= await intranetQueryCtl.poolQuery(queryStatement, "student_support");
+            let queryStatement = intranetQueryCtl.statements("SELECT","users_db", ["ee_type"],args.id);
+            let resp= await intranetQueryCtl.poolQuery(queryStatement, "users_db");
             if(resp.rows.length==0){throw new Error("The petition has not been executed")}
             return resp.rows[0];
         } catch (error) {
@@ -52,8 +52,8 @@ const mainOfices = {
     description: "returns the mainOfices list",
     resolve: async() => {
         try {
-            let queryStatement = intranetQueryCtl.statements("SELECT","student_support", ["main_ofice"]);
-            let resp= await intranetQueryCtl.poolQuery(queryStatement, "student_support");
+            let queryStatement = intranetQueryCtl.statements("SELECT","users_db", ["main_ofice"]);
+            let resp= await intranetQueryCtl.poolQuery(queryStatement, "users_db");
             return resp.rows;
         } catch (error) {
             return error;
@@ -68,8 +68,8 @@ const mainOficesById = {
     },
     resolve: async(_:null,args:inputDataType) => {
         try {
-            let queryStatement = intranetQueryCtl.statements("SELECT","student_support", ["main_ofice"],args.id);
-            let resp= await intranetQueryCtl.poolQuery(queryStatement,"student_support");
+            let queryStatement = intranetQueryCtl.statements("SELECT","users_db", ["main_ofice"],args.id);
+            let resp= await intranetQueryCtl.poolQuery(queryStatement,"users_db");
             if(resp.rows.length==0){throw new Error("The petition has not been executed")}
             return resp.rows[0];
         } catch (error) {
@@ -82,8 +82,8 @@ const sedeAddresses = {
     description: "returns the sedeAddresses list",
     resolve: async() => {
         try {
-            let queryStatement = intranetQueryCtl.statements("SELECT","student_support", ["sede_address"]);
-            let resp= await intranetQueryCtl.poolQuery(queryStatement, "student_support");
+            let queryStatement = intranetQueryCtl.statements("SELECT","users_db", ["sede_address"]);
+            let resp= await intranetQueryCtl.poolQuery(queryStatement, "users_db");
             return resp.rows;
         } catch (error) {
             return error;
@@ -98,8 +98,8 @@ const sedeAddressById = {
     },
     resolve: async(_:null,args:inputDataType) => {
         try {
-            let queryStatement = intranetQueryCtl.statements("SELECT","student_support", ["sede_address"],args.id);
-            let resp= await intranetQueryCtl.poolQuery(queryStatement,"student_support");
+            let queryStatement = intranetQueryCtl.statements("SELECT","users_db", ["sede_address"],args.id);
+            let resp= await intranetQueryCtl.poolQuery(queryStatement,"users_db");
             if(resp.rows.length==0){throw new Error("The petition has not been executed")}
             return resp.rows[0];
         } catch (error) {
@@ -112,8 +112,8 @@ const sedes = {
     description: "returns the sedes list",
     resolve: async() => {
         try {
-            let queryStatement = intranetQueryCtl.statements("SELECT","student_support", ["sede"]);
-            let resp= await intranetQueryCtl.poolQuery(queryStatement, "student_support");
+            let queryStatement = intranetQueryCtl.statements("SELECT","users_db", ["sede"]);
+            let resp= await intranetQueryCtl.poolQuery(queryStatement, "users_db");
             return resp.rows;
         } catch (error) {
             return error;
@@ -128,8 +128,8 @@ const sedeById = {
     },
     resolve: async(_:null,args:inputDataType) => {
         try {
-            let queryStatement = intranetQueryCtl.statements("SELECT","student_support", ["sede"],args.id);
-            let resp= await intranetQueryCtl.poolQuery(queryStatement,"student_support");
+            let queryStatement = intranetQueryCtl.statements("SELECT","users_db", ["sede"],args.id);
+            let resp= await intranetQueryCtl.poolQuery(queryStatement,"users_db");
             if(resp.rows.length==0){throw new Error("The petition has not been executed")}
             return resp.rows[0];
         } catch (error) {
@@ -142,8 +142,8 @@ const studentFederations = {
     description: "returns the studentFederations list",
     resolve: async() => {
         try {
-            let queryStatement = intranetQueryCtl.statements("SELECT","student_support", ["student_federation"]);
-            let resp= await intranetQueryCtl.poolQuery(queryStatement, "student_support");
+            let queryStatement = intranetQueryCtl.statements("SELECT","users_db", ["student_federation"]);
+            let resp= await intranetQueryCtl.poolQuery(queryStatement, "users_db");
             return resp.rows;
         } catch (error) {
             return error;
@@ -158,8 +158,8 @@ const studentFederationById = {
     },
     resolve: async(_:null,args:inputDataType) => {
         try {
-            let queryStatement = intranetQueryCtl.statements("SELECT","student_support", ["student_federation"],args.id);
-            let resp= await intranetQueryCtl.poolQuery(queryStatement,"student_support");
+            let queryStatement = intranetQueryCtl.statements("SELECT","users_db", ["student_federation"],args.id);
+            let resp= await intranetQueryCtl.poolQuery(queryStatement,"users_db");
             if(resp.rows.length==0){throw new Error("The petition has not been executed")}
             return resp.rows[0];
         } catch (error) {
@@ -172,8 +172,8 @@ const faculties = {
     description: "returns the faculties list",
     resolve: async() => {
         try {
-            let queryStatement = intranetQueryCtl.statements("SELECT","student_support", ["faculty"]);
-            let resp= await intranetQueryCtl.poolQuery(queryStatement, "student_support");
+            let queryStatement = intranetQueryCtl.statements("SELECT","users_db", ["faculty"]);
+            let resp= await intranetQueryCtl.poolQuery(queryStatement, "users_db");
             return resp.rows;
         } catch (error) {
             return error;
@@ -188,8 +188,8 @@ const facultyById = {
     },
     resolve: async(_:null,args:inputDataType) => {
         try {
-            let queryStatement = intranetQueryCtl.statements("SELECT","student_support", ["faculty"],args.id);
-            let resp= await intranetQueryCtl.poolQuery(queryStatement,"student_support");
+            let queryStatement = intranetQueryCtl.statements("SELECT","users_db", ["faculty"],args.id);
+            let resp= await intranetQueryCtl.poolQuery(queryStatement,"users_db");
             if(resp.rows.length==0){throw new Error("The petition has not been executed")}
             return resp.rows[0];
         } catch (error) {
@@ -202,8 +202,8 @@ const careers = {
     description: "returns the careers list",
     resolve: async() => {
         try {
-            let queryStatement = intranetQueryCtl.statements("SELECT","student_support", ["career"]);
-            let resp= await intranetQueryCtl.poolQuery(queryStatement, "student_support");
+            let queryStatement = intranetQueryCtl.statements("SELECT","users_db", ["career"]);
+            let resp= await intranetQueryCtl.poolQuery(queryStatement, "users_db");
             return resp.rows;
         } catch (error) {
             return error;
@@ -218,8 +218,8 @@ const careerById = {
     },
     resolve: async(_:null,args:inputDataType) => {
         try {
-            let queryStatement = intranetQueryCtl.statements("SELECT","student_support", ["career"],args.id);
-            let resp= await intranetQueryCtl.poolQuery(queryStatement,"student_support");
+            let queryStatement = intranetQueryCtl.statements("SELECT","users_db", ["career"],args.id);
+            let resp= await intranetQueryCtl.poolQuery(queryStatement,"users_db");
             if(resp.rows.length==0){throw new Error("The petition has not been executed")}
             return resp.rows[0];
         } catch (error) {
@@ -232,8 +232,8 @@ const studentCenters = {
     description: "returns the studentCenters list",
     resolve: async() => {
         try {
-            let queryStatement = intranetQueryCtl.statements("SELECT","student_support", ["student_center"]);
-            let resp= await intranetQueryCtl.poolQuery(queryStatement, "student_support");
+            let queryStatement = intranetQueryCtl.statements("SELECT","users_db", ["student_center"]);
+            let resp= await intranetQueryCtl.poolQuery(queryStatement, "users_db");
             return resp.rows;
         } catch (error) {
             return error;
@@ -248,8 +248,8 @@ const studentCenterById = {
     },
     resolve: async(_:null,args:inputDataType) => {
         try {
-            let queryStatement = intranetQueryCtl.statements("SELECT","student_support", ["student_center"],args.id);
-            let resp= await intranetQueryCtl.poolQuery(queryStatement,"student_support");
+            let queryStatement = intranetQueryCtl.statements("SELECT","users_db", ["student_center"],args.id);
+            let resp= await intranetQueryCtl.poolQuery(queryStatement,"users_db");
             if(resp.rows.length==0){throw new Error("The petition has not been executed")}
             return resp.rows[0];
         } catch (error) {
@@ -262,8 +262,8 @@ const educationEntities = {
     description: "returns the EducationEntity list",
     resolve: async() => {
         try {
-            let queryStatement = intranetQueryCtl.statements("SELECT","student_support", ["education_entity"]);
-            let resp= await intranetQueryCtl.poolQuery(queryStatement, "student_support");
+            let queryStatement = intranetQueryCtl.statements("SELECT","users_db", ["education_entity"]);
+            let resp= await intranetQueryCtl.poolQuery(queryStatement, "users_db");
             return resp.rows;
         } catch (error) {
             return error;
@@ -278,8 +278,8 @@ const educationEntityById = {
     },
     resolve: async(_:null,args:inputDataType) => {
         try {
-            let queryStatement = intranetQueryCtl.statements("SELECT","student_support", ["education_entity"],args.id);
-            let resp= await intranetQueryCtl.poolQuery(queryStatement,"student_support");
+            let queryStatement = intranetQueryCtl.statements("SELECT","users_db", ["education_entity"],args.id);
+            let resp= await intranetQueryCtl.poolQuery(queryStatement,"users_db");
             return resp.rows;
         } catch (error) {
             return error;
@@ -291,8 +291,8 @@ const disabilitiesTypes = {
     description: "returns the DisabilityType list",
     resolve: async() => {
         try {
-            let queryStatement = intranetQueryCtl.statements("SELECT","student_support", ["disability_type"]);
-            let resp= await intranetQueryCtl.poolQuery(queryStatement, "student_support");
+            let queryStatement = intranetQueryCtl.statements("SELECT","users_db", ["disability_type"]);
+            let resp= await intranetQueryCtl.poolQuery(queryStatement, "users_db");
             return resp.rows;
         } catch (error) {
             return error;
@@ -307,8 +307,8 @@ const disabilityTypeById = {
     },
     resolve: async(_:null,args:inputDataType) => {
         try {
-            let queryStatement = intranetQueryCtl.statements("SELECT","student_support", ["disability_type"],args.id);
-            let resp= await intranetQueryCtl.poolQuery(queryStatement,"student_support");
+            let queryStatement = intranetQueryCtl.statements("SELECT","users_db", ["disability_type"],args.id);
+            let resp= await intranetQueryCtl.poolQuery(queryStatement,"users_db");
             return resp.rows;
         } catch (error) {
             return error;
@@ -320,8 +320,8 @@ const disabilitiesDetails = {
     description: "returns the DisabilitiesDetail list",
     resolve: async() => {
         try {
-            let queryStatement = intranetQueryCtl.statements("SELECT","student_support", ["disability_detail"]);
-            let resp= await intranetQueryCtl.poolQuery(queryStatement, "student_support");
+            let queryStatement = intranetQueryCtl.statements("SELECT","users_db", ["disability_detail"]);
+            let resp= await intranetQueryCtl.poolQuery(queryStatement, "users_db");
             return resp.rows;
         } catch (error) {
             return error;
@@ -336,8 +336,8 @@ const disabilityDetailById = {
     },
     resolve: async(_:null,args:inputDataType) => {
         try {
-            let queryStatement = intranetQueryCtl.statements("SELECT","student_support", ["disability_detail"],args.id);
-            let resp= await intranetQueryCtl.poolQuery(queryStatement,"student_support");
+            let queryStatement = intranetQueryCtl.statements("SELECT","users_db", ["disability_detail"],args.id);
+            let resp= await intranetQueryCtl.poolQuery(queryStatement,"users_db");
             if(resp.rows.length==0){throw new Error("The petition has not been executed")}
             return resp.rows[0];
         } catch (error) {
@@ -350,8 +350,8 @@ const genderIdentities = {
     description: "returns the GenderIdentity list",
     resolve: async() => {
         try {
-            let queryStatement = intranetQueryCtl.statements("SELECT","student_support", ["gender_identity"]);
-            let resp= await intranetQueryCtl.poolQuery(queryStatement, "student_support");
+            let queryStatement = intranetQueryCtl.statements("SELECT","users_db", ["gender_identity"]);
+            let resp= await intranetQueryCtl.poolQuery(queryStatement, "users_db");
             return resp.rows;
         } catch (error) {
             return error;
@@ -366,8 +366,8 @@ const genderIdentityById = {
     },
     resolve: async(_:null,args:inputDataType) => {
         try {
-            let queryStatement = intranetQueryCtl.statements("SELECT","student_support", ["gender_identity"],args.id);
-            let resp= await intranetQueryCtl.poolQuery(queryStatement,"student_support");
+            let queryStatement = intranetQueryCtl.statements("SELECT","users_db", ["gender_identity"],args.id);
+            let resp= await intranetQueryCtl.poolQuery(queryStatement,"users_db");
             if(resp.rows.length==0){throw new Error("The petition has not been executed")}
             return resp.rows[0];
         } catch (error) {
@@ -380,8 +380,8 @@ const studentsAddresses = {
     description: "returns the StudentAddress list",
     resolve: async() => {
         try {
-            let queryStatement = intranetQueryCtl.statements("SELECT","student_support", ["student_address"]);
-            let resp= await intranetQueryCtl.poolQuery(queryStatement, "student_support");
+            let queryStatement = intranetQueryCtl.statements("SELECT","users_db", ["student_address"]);
+            let resp= await intranetQueryCtl.poolQuery(queryStatement, "users_db");
             return resp.rows;
         } catch (error) {
             return error;
@@ -396,8 +396,8 @@ const studentAddressById = {
     },
     resolve: async(_:null,args:inputDataType) => {
         try {
-            let queryStatement = intranetQueryCtl.statements("SELECT","student_support", ["student_address"],args.id);
-            let resp= await intranetQueryCtl.poolQuery(queryStatement,"student_support");
+            let queryStatement = intranetQueryCtl.statements("SELECT","users_db", ["student_address"],args.id);
+            let resp= await intranetQueryCtl.poolQuery(queryStatement,"users_db");
             if(resp.rows.length==0){throw new Error("The petition has not been executed")}
             return resp.rows[0];
         } catch (error) {
@@ -410,8 +410,8 @@ const students = {
     description: "returns the Student list",
     resolve: async() => {
         try {
-            let queryStatement = intranetQueryCtl.statements("SELECT","student_support", ["student"]);
-            let resp= await intranetQueryCtl.poolQuery(queryStatement, "student_support");
+            let queryStatement = intranetQueryCtl.statements("SELECT","users_db", ["student"]);
+            let resp= await intranetQueryCtl.poolQuery(queryStatement, "users_db");
             return resp.rows;
         } catch (error) {
             return error;
@@ -426,8 +426,8 @@ const studentById = {
     },
     resolve: async(_:null,args:inputDataType) => {
         try {
-            let queryStatement = intranetQueryCtl.statements("SELECT","student_support", ["student"],args.id);
-            let resp= await intranetQueryCtl.poolQuery(queryStatement,"student_support");
+            let queryStatement = intranetQueryCtl.statements("SELECT","users_db", ["student"],args.id);
+            let resp= await intranetQueryCtl.poolQuery(queryStatement,"users_db");
             if(resp.rows.length==0){throw new Error("The petition has not been executed")}
             return resp.rows[0];
         } catch (error) {
