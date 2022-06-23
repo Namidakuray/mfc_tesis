@@ -134,18 +134,6 @@ class UsersCtl extends AuthBase {
 						throw new Error("No se puede actualizar la tabla");
 					}
 				}
-				case "DELETE": {
-					if (id) {
-						return (queryStatement = {
-							text: `DELETE FROM ${table[0]} WHERE id=$1 RETURNING *;`,
-							values: [id],
-						});
-					} else {
-						throw new Error(
-							"No se puede eliminar un registro sin id"
-						);
-					}
-				}
 				default:
 					throw new Error("No se puede ejecutar la acción");
 			}

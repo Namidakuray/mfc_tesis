@@ -7,41 +7,19 @@ class PublicCtl {
 		this.pool = new SingletonPublic.getInstance();
 	}
 
-	public async getAllStudentsByRanking() {
-		let byRankingStudents = {
-			name: "get-ranking-students",
-			text: "SELECT student.name, student.paternal_lname, student.maternal_lname, (SELECT name as career_name FROM career WHERE career.id=student.career_id), student.experience, student.created_at FROM student WHERE student.active=TRUE ORDER BY student.experience DESC LIMIT 100;",
-		};
-		try {
-			let client = await this.pool.connect();
-			try {
-				const res = await client.query(byRankingStudents);
-				return res.rows;
-			} catch (error: any) {
-				return {
-					message: "Error al procesar query de ranking",
-					data: error.stack,
-				};
-			} finally {
-				client.release();
-			}
-		} catch (error) {
-			return { message: "error al conectar con la DDBB", data: error };
-		}
-	}
-
-	public async getStudentsByInstitution(
-		institution_id: Number
+	public async getUsersByCompany(
+		institution_id: Number,
+		user_atribute: Number
 	) {
-		let byInstitutionStudents = {
-			name: "get-institution-students",
-			text: "SELECT student.name, student.paternal_lname, student.maternal_lname, (SELECT name as career_name FROM career WHERE career.id=student.career_id), student.experience, student.created_at FROM student INNER JOIN career ON student.career_id=career.id INNER JOIN faculty ON career.faculty_id=faculty.id INNER JOIN sede ON faculty.sede_id=sede.id INNER JOIN education_entity ON sede.education_entity_id=education_entity.id WHERE education_entity.id=$1 AND student.active=TRUE ORDER BY student.experience",
-			values: [institution_id],
+		let getUsersByCompany = {
+			name: "get-users-by-company",
+			text: "SELECT users.name, users.first_lastname, users.second_lastname, (SELECT name as company_name FROM company INNER JOIN sucursal ON company.id=sucursal.company_id WHERE sucursal.id=users.sucursal_id), (SELECT name as region_name FROM region INNER JOIN address ON region.id=address.region_id WHERE address.id=users.address_id), (SELECT name as country_name FROM country INNER JOIN address ON country.id=address.country_id WHERE address.id=users.address_id), users.created_at FROM users INNER JOIN sucursal ON users.sucursal_id=sucursal.id  WHERE sucursal.company_id=$1 AND users.status='active' ORDER BY users.$2",
+			values: [institution_id, user_atribute],
 		};
 		try {
 			let client = await this.pool.connect();
 			try {
-				const res = await client.query(byInstitutionStudents);
+				const res = await client.query(getUsersByCompany);
 				return res.rows;
 			} catch (error: any) {
 				return {
