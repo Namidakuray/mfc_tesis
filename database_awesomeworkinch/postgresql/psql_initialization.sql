@@ -21,51 +21,15 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- Name: address; Type: TABLE; Schema: public; Owner: testpsql_user
---
-
-CREATE TABLE public.address (
-    id integer NOT NULL,
-    country_id integer NOT NULL,
-    region_id integer NOT NULL,
-    city_id integer NOT NULL,
-    street_avenue character varying NOT NULL,
-    number integer
-);
-
-
-ALTER TABLE public.address OWNER TO testpsql_user;
-
---
--- Name: address_id_seq; Type: SEQUENCE; Schema: public; Owner: testpsql_user
---
-
-CREATE SEQUENCE public.address_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.address_id_seq OWNER TO testpsql_user;
-
---
--- Name: address_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: testpsql_user
---
-
-ALTER SEQUENCE public.address_id_seq OWNED BY public.address.id;
-
-
---
 -- Name: allow; Type: TABLE; Schema: public; Owner: testpsql_user
 --
 
 CREATE TABLE public.allow (
     id integer NOT NULL,
     name character varying NOT NULL,
-    description character varying NOT NULL
+    description character varying NOT NULL,
+    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    updated_at date DEFAULT CURRENT_DATE
 );
 
 
@@ -100,7 +64,9 @@ ALTER SEQUENCE public.allow_id_seq OWNED BY public.allow.id;
 CREATE TABLE public.allow_rol (
     id integer NOT NULL,
     allow_id integer NOT NULL,
-    rol_id integer NOT NULL
+    rol_id integer NOT NULL,
+    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    updated_at date DEFAULT CURRENT_DATE
 );
 
 
@@ -135,7 +101,9 @@ ALTER SEQUENCE public.allow_rol_id_seq OWNED BY public.allow_rol.id;
 CREATE TABLE public.city (
     id integer NOT NULL,
     name character varying NOT NULL,
-    region_id integer NOT NULL
+    region_id integer NOT NULL,
+    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    updated_at date DEFAULT CURRENT_DATE
 );
 
 
@@ -169,15 +137,59 @@ ALTER SEQUENCE public.city_id_seq OWNED BY public.city.id;
 
 CREATE TABLE public.company (
     id integer NOT NULL,
-    rut character varying NOT NULL,
+    rut integer NOT NULL,
+    verify_code character varying NOT NULL,
     status character varying NOT NULL,
+    company_type character varying NOT NULL,
     oficial_name character varying NOT NULL,
     commercial_name character varying NOT NULL,
-    address_id integer NOT NULL
+    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    updated_at date DEFAULT CURRENT_DATE
 );
 
 
 ALTER TABLE public.company OWNER TO testpsql_user;
+
+--
+-- Name: company_address; Type: TABLE; Schema: public; Owner: testpsql_user
+--
+
+CREATE TABLE public.company_address (
+    id integer NOT NULL,
+    country_id integer NOT NULL,
+    region_id integer NOT NULL,
+    city_id integer NOT NULL,
+    company_id integer NOT NULL,
+    street_avenue character varying NOT NULL,
+    number integer,
+    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    updated_at date DEFAULT CURRENT_DATE
+);
+
+
+ALTER TABLE public.company_address OWNER TO testpsql_user;
+
+--
+-- Name: company_address_id_seq; Type: SEQUENCE; Schema: public; Owner: testpsql_user
+--
+
+CREATE SEQUENCE public.company_address_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.company_address_id_seq OWNER TO testpsql_user;
+
+--
+-- Name: company_address_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: testpsql_user
+--
+
+ALTER SEQUENCE public.company_address_id_seq OWNED BY public.company_address.id;
+
 
 --
 -- Name: company_id_seq; Type: SEQUENCE; Schema: public; Owner: testpsql_user
@@ -207,7 +219,9 @@ ALTER SEQUENCE public.company_id_seq OWNED BY public.company.id;
 
 CREATE TABLE public.country (
     id integer NOT NULL,
-    name character varying NOT NULL
+    name character varying NOT NULL,
+    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    updated_at date DEFAULT CURRENT_DATE
 );
 
 
@@ -242,7 +256,9 @@ ALTER SEQUENCE public.country_id_seq OWNED BY public.country.id;
 CREATE TABLE public.region (
     id integer NOT NULL,
     name character varying NOT NULL,
-    country_id integer NOT NULL
+    country_id integer NOT NULL,
+    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    updated_at date DEFAULT CURRENT_DATE
 );
 
 
@@ -277,7 +293,9 @@ ALTER SEQUENCE public.region_id_seq OWNED BY public.region.id;
 CREATE TABLE public.rol (
     id integer NOT NULL,
     name character varying NOT NULL,
-    description character varying NOT NULL
+    description character varying NOT NULL,
+    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    updated_at date DEFAULT CURRENT_DATE
 );
 
 
@@ -311,8 +329,10 @@ ALTER SEQUENCE public.rol_id_seq OWNED BY public.rol.id;
 
 CREATE TABLE public.rol_user (
     id integer NOT NULL,
-    user_id integer NOT NULL,
-    rol_id integer NOT NULL
+    users_id integer NOT NULL,
+    rol_id integer NOT NULL,
+    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    updated_at date DEFAULT CURRENT_DATE
 );
 
 
@@ -348,11 +368,53 @@ CREATE TABLE public.sucursal (
     id integer NOT NULL,
     name character varying NOT NULL,
     company_id integer NOT NULL,
-    address_id integer NOT NULL
+    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    updated_at date DEFAULT CURRENT_DATE
 );
 
 
 ALTER TABLE public.sucursal OWNER TO testpsql_user;
+
+--
+-- Name: sucursal_address; Type: TABLE; Schema: public; Owner: testpsql_user
+--
+
+CREATE TABLE public.sucursal_address (
+    id integer NOT NULL,
+    country_id integer NOT NULL,
+    region_id integer NOT NULL,
+    city_id integer NOT NULL,
+    sucursal_id integer NOT NULL,
+    street_avenue character varying NOT NULL,
+    number integer,
+    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    updated_at date DEFAULT CURRENT_DATE
+);
+
+
+ALTER TABLE public.sucursal_address OWNER TO testpsql_user;
+
+--
+-- Name: sucursal_address_id_seq; Type: SEQUENCE; Schema: public; Owner: testpsql_user
+--
+
+CREATE SEQUENCE public.sucursal_address_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sucursal_address_id_seq OWNER TO testpsql_user;
+
+--
+-- Name: sucursal_address_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: testpsql_user
+--
+
+ALTER SEQUENCE public.sucursal_address_id_seq OWNED BY public.sucursal_address.id;
+
 
 --
 -- Name: sucursal_id_seq; Type: SEQUENCE; Schema: public; Owner: testpsql_user
@@ -382,7 +444,8 @@ ALTER SEQUENCE public.sucursal_id_seq OWNED BY public.sucursal.id;
 
 CREATE TABLE public.users (
     id integer NOT NULL,
-    run character varying NOT NULL,
+    run integer NOT NULL,
+    verify_code character varying NOT NULL,
     status character varying NOT NULL,
     name character varying NOT NULL,
     first_lastname character varying NOT NULL,
@@ -390,12 +453,54 @@ CREATE TABLE public.users (
     birthdate date NOT NULL,
     email character varying NOT NULL,
     password character varying NOT NULL,
-    address_id integer NOT NULL,
-    sucursal_id integer NOT NULL
+    sucursal_id integer NOT NULL,
+    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    updated_at date DEFAULT CURRENT_DATE
 );
 
 
 ALTER TABLE public.users OWNER TO testpsql_user;
+
+--
+-- Name: users_address; Type: TABLE; Schema: public; Owner: testpsql_user
+--
+
+CREATE TABLE public.users_address (
+    id integer NOT NULL,
+    country_id integer NOT NULL,
+    region_id integer NOT NULL,
+    city_id integer NOT NULL,
+    users_id integer NOT NULL,
+    street_avenue character varying NOT NULL,
+    number integer,
+    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    updated_at date DEFAULT CURRENT_DATE
+);
+
+
+ALTER TABLE public.users_address OWNER TO testpsql_user;
+
+--
+-- Name: users_address_id_seq; Type: SEQUENCE; Schema: public; Owner: testpsql_user
+--
+
+CREATE SEQUENCE public.users_address_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_address_id_seq OWNER TO testpsql_user;
+
+--
+-- Name: users_address_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: testpsql_user
+--
+
+ALTER SEQUENCE public.users_address_id_seq OWNED BY public.users_address.id;
+
 
 --
 -- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: testpsql_user
@@ -417,13 +522,6 @@ ALTER TABLE public.users_id_seq OWNER TO testpsql_user;
 --
 
 ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
-
-
---
--- Name: address id; Type: DEFAULT; Schema: public; Owner: testpsql_user
---
-
-ALTER TABLE ONLY public.address ALTER COLUMN id SET DEFAULT nextval('public.address_id_seq'::regclass);
 
 
 --
@@ -452,6 +550,13 @@ ALTER TABLE ONLY public.city ALTER COLUMN id SET DEFAULT nextval('public.city_id
 --
 
 ALTER TABLE ONLY public.company ALTER COLUMN id SET DEFAULT nextval('public.company_id_seq'::regclass);
+
+
+--
+-- Name: company_address id; Type: DEFAULT; Schema: public; Owner: testpsql_user
+--
+
+ALTER TABLE ONLY public.company_address ALTER COLUMN id SET DEFAULT nextval('public.company_address_id_seq'::regclass);
 
 
 --
@@ -490,6 +595,13 @@ ALTER TABLE ONLY public.sucursal ALTER COLUMN id SET DEFAULT nextval('public.suc
 
 
 --
+-- Name: sucursal_address id; Type: DEFAULT; Schema: public; Owner: testpsql_user
+--
+
+ALTER TABLE ONLY public.sucursal_address ALTER COLUMN id SET DEFAULT nextval('public.sucursal_address_id_seq'::regclass);
+
+
+--
 -- Name: users id; Type: DEFAULT; Schema: public; Owner: testpsql_user
 --
 
@@ -497,26 +609,25 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 
 
 --
--- Data for Name: address; Type: TABLE DATA; Schema: public; Owner: testpsql_user
+-- Name: users_address id; Type: DEFAULT; Schema: public; Owner: testpsql_user
 --
 
-COPY public.address (id, country_id, region_id, city_id, street_avenue, number) FROM stdin;
-\.
+ALTER TABLE ONLY public.users_address ALTER COLUMN id SET DEFAULT nextval('public.users_address_id_seq'::regclass);
 
 
 --
 -- Data for Name: allow; Type: TABLE DATA; Schema: public; Owner: testpsql_user
 --
 
-COPY public.allow (id, name, description) FROM stdin;
-1	user_Create	Permiso de creación
-2	user_Read	Permiso de lectura
-3	user_Update	Permiso de actualización
-4	user_Delete	Permiso de eliminación
-5	content_Create	Permiso de creación
-6	content_Read	Permiso de lectura
-7	content_Update	Permiso de actualización
-8	content_Delete	Permiso de eliminación
+COPY public.allow (id, name, description, created_at, updated_at) FROM stdin;
+1	user_Create	Permiso de creación	2022-06-23 02:34:18.022474	2022-06-23
+2	user_Read	Permiso de lectura	2022-06-23 02:34:18.037209	2022-06-23
+3	user_Update	Permiso de actualización	2022-06-23 02:34:18.048397	2022-06-23
+4	user_Delete	Permiso de eliminación	2022-06-23 02:34:18.063605	2022-06-23
+5	content_Create	Permiso de creación	2022-06-23 02:34:18.0788	2022-06-23
+6	content_Read	Permiso de lectura	2022-06-23 02:34:18.109966	2022-06-23
+7	content_Update	Permiso de actualización	2022-06-23 02:34:18.125021	2022-06-23
+8	content_Delete	Permiso de eliminación	2022-06-23 02:34:18.155961	2022-06-23
 \.
 
 
@@ -524,28 +635,28 @@ COPY public.allow (id, name, description) FROM stdin;
 -- Data for Name: allow_rol; Type: TABLE DATA; Schema: public; Owner: testpsql_user
 --
 
-COPY public.allow_rol (id, allow_id, rol_id) FROM stdin;
-1	1	1
-2	2	1
-3	3	1
-4	5	1
-5	6	1
-6	7	1
-7	5	2
-8	6	2
-9	7	2
-10	1	3
-11	2	3
-12	3	3
-13	5	3
-14	6	3
-15	7	3
-16	5	4
-17	6	4
-18	7	4
-19	5	5
-20	6	5
-21	7	5
+COPY public.allow_rol (id, allow_id, rol_id, created_at, updated_at) FROM stdin;
+1	1	1	2022-06-23 02:34:18.299252	2022-06-23
+2	2	1	2022-06-23 02:34:18.306194	2022-06-23
+3	3	1	2022-06-23 02:34:18.329701	2022-06-23
+4	5	1	2022-06-23 02:34:18.332306	2022-06-23
+5	6	1	2022-06-23 02:34:18.340979	2022-06-23
+6	7	1	2022-06-23 02:34:18.34555	2022-06-23
+7	5	2	2022-06-23 02:34:18.371265	2022-06-23
+8	6	2	2022-06-23 02:34:18.387444	2022-06-23
+9	7	2	2022-06-23 02:34:18.403626	2022-06-23
+10	1	3	2022-06-23 02:34:18.418806	2022-06-23
+11	2	3	2022-06-23 02:34:18.433939	2022-06-23
+12	3	3	2022-06-23 02:34:18.438641	2022-06-23
+13	5	3	2022-06-23 02:34:18.444897	2022-06-23
+14	6	3	2022-06-23 02:34:18.448982	2022-06-23
+15	7	3	2022-06-23 02:34:18.465443	2022-06-23
+16	5	4	2022-06-23 02:34:18.46996	2022-06-23
+17	6	4	2022-06-23 02:34:18.48043	2022-06-23
+18	7	4	2022-06-23 02:34:18.495917	2022-06-23
+19	5	5	2022-06-23 02:34:18.511892	2022-06-23
+20	6	5	2022-06-23 02:34:18.527125	2022-06-23
+21	7	5	2022-06-23 02:34:18.542782	2022-06-23
 \.
 
 
@@ -553,7 +664,10 @@ COPY public.allow_rol (id, allow_id, rol_id) FROM stdin;
 -- Data for Name: city; Type: TABLE DATA; Schema: public; Owner: testpsql_user
 --
 
-COPY public.city (id, name, region_id) FROM stdin;
+COPY public.city (id, name, region_id, created_at, updated_at) FROM stdin;
+1	Santiago centro	7	2022-06-23 02:34:18.759672	2022-06-23
+2	Vina del mar	6	2022-06-23 02:34:18.764162	2022-06-23
+3	Concepcion	11	2022-06-23 02:34:18.775366	2022-06-23
 \.
 
 
@@ -561,7 +675,17 @@ COPY public.city (id, name, region_id) FROM stdin;
 -- Data for Name: company; Type: TABLE DATA; Schema: public; Owner: testpsql_user
 --
 
-COPY public.company (id, rut, status, oficial_name, commercial_name, address_id) FROM stdin;
+COPY public.company (id, rut, verify_code, status, company_type, oficial_name, commercial_name, created_at, updated_at) FROM stdin;
+1	71540100	2	active	Universidad	Andres Bello	UNAB	2022-06-23 02:39:50.335396	2022-06-23
+\.
+
+
+--
+-- Data for Name: company_address; Type: TABLE DATA; Schema: public; Owner: testpsql_user
+--
+
+COPY public.company_address (id, country_id, region_id, city_id, company_id, street_avenue, number, created_at, updated_at) FROM stdin;
+1	1	7	1	1	Republica	239	2022-06-23 02:39:50.55078	2022-06-23
 \.
 
 
@@ -569,8 +693,8 @@ COPY public.company (id, rut, status, oficial_name, commercial_name, address_id)
 -- Data for Name: country; Type: TABLE DATA; Schema: public; Owner: testpsql_user
 --
 
-COPY public.country (id, name) FROM stdin;
-1	Chile
+COPY public.country (id, name, created_at, updated_at) FROM stdin;
+1	Chile	2022-06-23 02:34:18.558266	2022-06-23
 \.
 
 
@@ -578,23 +702,23 @@ COPY public.country (id, name) FROM stdin;
 -- Data for Name: region; Type: TABLE DATA; Schema: public; Owner: testpsql_user
 --
 
-COPY public.region (id, name, country_id) FROM stdin;
-1	de Arica y Parinacota	1
-2	de Tarapacá	1
-3	de Antofagasta	1
-4	de Atacama	1
-5	de Coquimbo	1
-6	de Valparaíso	1
-7	Metropolitana de Santiago	1
-8	del Libertador General Bernardo O"Higgins	1
-9	del Maule	1
-10	de Ñuble	1
-11	del Biobío	1
-12	de La Araucanía	1
-13	de Los Ríos	1
-14	de Los Lagos	1
-15	de Aysén del General Carlos Ibáñez del Campo	1
-16	de Magallanes y de la Antártica Chilena	1
+COPY public.region (id, name, country_id, created_at, updated_at) FROM stdin;
+1	Arica y Parinacota	1	2022-06-23 02:34:18.594034	2022-06-23
+2	Tarapacá	1	2022-06-23 02:34:18.596596	2022-06-23
+3	Antofagasta	1	2022-06-23 02:34:18.605433	2022-06-23
+4	Atacama	1	2022-06-23 02:34:18.621089	2022-06-23
+5	Coquimbo	1	2022-06-23 02:34:18.625404	2022-06-23
+6	Valparaíso	1	2022-06-23 02:34:18.64016	2022-06-23
+7	Metropolitana de Santiago	1	2022-06-23 02:34:18.65226	2022-06-23
+8	Libertador General Bernardo O"Higgins	1	2022-06-23 02:34:18.670289	2022-06-23
+9	Maule	1	2022-06-23 02:34:18.675629	2022-06-23
+10	Ñuble	1	2022-06-23 02:34:18.678278	2022-06-23
+11	Biobío	1	2022-06-23 02:34:18.683195	2022-06-23
+12	La Araucanía	1	2022-06-23 02:34:18.688703	2022-06-23
+13	Los Ríos	1	2022-06-23 02:34:18.697819	2022-06-23
+14	Los Lagos	1	2022-06-23 02:34:18.713767	2022-06-23
+15	Aysén del General Carlos Ibáñez del Campo	1	2022-06-23 02:34:18.729784	2022-06-23
+16	Magallanes y de la Antártica Chilena	1	2022-06-23 02:34:18.733306	2022-06-23
 \.
 
 
@@ -602,12 +726,12 @@ COPY public.region (id, name, country_id) FROM stdin;
 -- Data for Name: rol; Type: TABLE DATA; Schema: public; Owner: testpsql_user
 --
 
-COPY public.rol (id, name, description) FROM stdin;
-1	Administrador	Rol de administrador
-2	Investigador	Rol de investigador
-3	Admin_Academico	Rol de académico
-4	Docente	Rol de docente
-5	Estudiante	Rol de estudiante
+COPY public.rol (id, name, description, created_at, updated_at) FROM stdin;
+1	Administrador	Rol de administrador	2022-06-23 02:34:18.185687	2022-06-23
+2	Investigador	Rol de investigador	2022-06-23 02:34:18.216867	2022-06-23
+3	Admin_Academico	Rol de académico	2022-06-23 02:34:18.232676	2022-06-23
+4	Docente	Rol de docente	2022-06-23 02:34:18.264266	2022-06-23
+5	Estudiante	Rol de estudiante	2022-06-23 02:34:18.295078	2022-06-23
 \.
 
 
@@ -615,7 +739,9 @@ COPY public.rol (id, name, description) FROM stdin;
 -- Data for Name: rol_user; Type: TABLE DATA; Schema: public; Owner: testpsql_user
 --
 
-COPY public.rol_user (id, user_id, rol_id) FROM stdin;
+COPY public.rol_user (id, users_id, rol_id, created_at, updated_at) FROM stdin;
+1	1	5	2022-06-23 02:40:34.881664	2022-06-23
+2	2	4	2022-06-23 02:40:37.275309	2022-06-23
 \.
 
 
@@ -623,7 +749,19 @@ COPY public.rol_user (id, user_id, rol_id) FROM stdin;
 -- Data for Name: sucursal; Type: TABLE DATA; Schema: public; Owner: testpsql_user
 --
 
-COPY public.sucursal (id, name, company_id, address_id) FROM stdin;
+COPY public.sucursal (id, name, company_id, created_at, updated_at) FROM stdin;
+1	Vina del mar	1	2022-06-23 02:39:50.367575	2022-06-23
+2	Concepcion	1	2022-06-23 02:39:50.39563	2022-06-23
+\.
+
+
+--
+-- Data for Name: sucursal_address; Type: TABLE DATA; Schema: public; Owner: testpsql_user
+--
+
+COPY public.sucursal_address (id, country_id, region_id, city_id, sucursal_id, street_avenue, number, created_at, updated_at) FROM stdin;
+1	1	6	2	1	Quillota	980	2022-06-23 02:39:50.581906	2022-06-23
+2	1	11	3	2	Talcahuano	7100	2022-06-23 02:39:50.611765	2022-06-23
 \.
 
 
@@ -631,15 +769,20 @@ COPY public.sucursal (id, name, company_id, address_id) FROM stdin;
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: testpsql_user
 --
 
-COPY public.users (id, run, status, name, first_lastname, second_lastname, birthdate, email, password, address_id, sucursal_id) FROM stdin;
+COPY public.users (id, run, verify_code, status, name, first_lastname, second_lastname, birthdate, email, password, sucursal_id, created_at, updated_at) FROM stdin;
+1	11111111	1	Mario	active	Flores	Cruz	1992-01-14	m.florescruz@uandresbello.edu	TODO	1	2022-06-23 02:39:50.472813	2022-06-23
+2	22222222	2	Sergio	active	Rivera	Olivares	1965-01-01	sergio.rivera@unab.cl	TODO	2	2022-06-23 02:39:50.520023	2022-06-23
 \.
 
 
 --
--- Name: address_id_seq; Type: SEQUENCE SET; Schema: public; Owner: testpsql_user
+-- Data for Name: users_address; Type: TABLE DATA; Schema: public; Owner: testpsql_user
 --
 
-SELECT pg_catalog.setval('public.address_id_seq', 1, false);
+COPY public.users_address (id, country_id, region_id, city_id, users_id, street_avenue, number, created_at, updated_at) FROM stdin;
+1	1	6	2	1	Alvarez	58	2022-06-23 02:40:13.665249	2022-06-23
+2	1	11	3	2	sin nombre	555	2022-06-23 02:40:25.401978	2022-06-23
+\.
 
 
 --
@@ -660,14 +803,21 @@ SELECT pg_catalog.setval('public.allow_rol_id_seq', 21, true);
 -- Name: city_id_seq; Type: SEQUENCE SET; Schema: public; Owner: testpsql_user
 --
 
-SELECT pg_catalog.setval('public.city_id_seq', 1, false);
+SELECT pg_catalog.setval('public.city_id_seq', 3, true);
+
+
+--
+-- Name: company_address_id_seq; Type: SEQUENCE SET; Schema: public; Owner: testpsql_user
+--
+
+SELECT pg_catalog.setval('public.company_address_id_seq', 1, true);
 
 
 --
 -- Name: company_id_seq; Type: SEQUENCE SET; Schema: public; Owner: testpsql_user
 --
 
-SELECT pg_catalog.setval('public.company_id_seq', 1, false);
+SELECT pg_catalog.setval('public.company_id_seq', 1, true);
 
 
 --
@@ -695,29 +845,35 @@ SELECT pg_catalog.setval('public.rol_id_seq', 5, true);
 -- Name: rol_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: testpsql_user
 --
 
-SELECT pg_catalog.setval('public.rol_user_id_seq', 1, false);
+SELECT pg_catalog.setval('public.rol_user_id_seq', 2, true);
+
+
+--
+-- Name: sucursal_address_id_seq; Type: SEQUENCE SET; Schema: public; Owner: testpsql_user
+--
+
+SELECT pg_catalog.setval('public.sucursal_address_id_seq', 2, true);
 
 
 --
 -- Name: sucursal_id_seq; Type: SEQUENCE SET; Schema: public; Owner: testpsql_user
 --
 
-SELECT pg_catalog.setval('public.sucursal_id_seq', 1, false);
+SELECT pg_catalog.setval('public.sucursal_id_seq', 2, true);
+
+
+--
+-- Name: users_address_id_seq; Type: SEQUENCE SET; Schema: public; Owner: testpsql_user
+--
+
+SELECT pg_catalog.setval('public.users_address_id_seq', 2, true);
 
 
 --
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: testpsql_user
 --
 
-SELECT pg_catalog.setval('public.users_id_seq', 1, false);
-
-
---
--- Name: address address_pkey; Type: CONSTRAINT; Schema: public; Owner: testpsql_user
---
-
-ALTER TABLE ONLY public.address
-    ADD CONSTRAINT address_pkey PRIMARY KEY (id);
+SELECT pg_catalog.setval('public.users_id_seq', 2, true);
 
 
 --
@@ -761,11 +917,27 @@ ALTER TABLE ONLY public.city
 
 
 --
+-- Name: company_address company_address_pkey; Type: CONSTRAINT; Schema: public; Owner: testpsql_user
+--
+
+ALTER TABLE ONLY public.company_address
+    ADD CONSTRAINT company_address_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: company company_pkey; Type: CONSTRAINT; Schema: public; Owner: testpsql_user
 --
 
 ALTER TABLE ONLY public.company
     ADD CONSTRAINT company_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: company company_rut_key; Type: CONSTRAINT; Schema: public; Owner: testpsql_user
+--
+
+ALTER TABLE ONLY public.company
+    ADD CONSTRAINT company_rut_key UNIQUE (rut);
 
 
 --
@@ -825,11 +997,27 @@ ALTER TABLE ONLY public.rol_user
 
 
 --
+-- Name: sucursal_address sucursal_address_pkey; Type: CONSTRAINT; Schema: public; Owner: testpsql_user
+--
+
+ALTER TABLE ONLY public.sucursal_address
+    ADD CONSTRAINT sucursal_address_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: sucursal sucursal_pkey; Type: CONSTRAINT; Schema: public; Owner: testpsql_user
 --
 
 ALTER TABLE ONLY public.sucursal
     ADD CONSTRAINT sucursal_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users_address users_address_pkey; Type: CONSTRAINT; Schema: public; Owner: testpsql_user
+--
+
+ALTER TABLE ONLY public.users_address
+    ADD CONSTRAINT users_address_pkey PRIMARY KEY (id);
 
 
 --
@@ -853,30 +1041,6 @@ ALTER TABLE ONLY public.users
 --
 
 CREATE UNIQUE INDEX user_email_index ON public.users USING btree (email);
-
-
---
--- Name: address address_city_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: testpsql_user
---
-
-ALTER TABLE ONLY public.address
-    ADD CONSTRAINT address_city_id_fkey FOREIGN KEY (city_id) REFERENCES public.city(id);
-
-
---
--- Name: address address_country_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: testpsql_user
---
-
-ALTER TABLE ONLY public.address
-    ADD CONSTRAINT address_country_id_fkey FOREIGN KEY (country_id) REFERENCES public.country(id);
-
-
---
--- Name: address address_region_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: testpsql_user
---
-
-ALTER TABLE ONLY public.address
-    ADD CONSTRAINT address_region_id_fkey FOREIGN KEY (region_id) REFERENCES public.region(id);
 
 
 --
@@ -904,11 +1068,35 @@ ALTER TABLE ONLY public.city
 
 
 --
--- Name: company company_address_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: testpsql_user
+-- Name: company_address company_address_city_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: testpsql_user
 --
 
-ALTER TABLE ONLY public.company
-    ADD CONSTRAINT company_address_id_fkey FOREIGN KEY (address_id) REFERENCES public.address(id);
+ALTER TABLE ONLY public.company_address
+    ADD CONSTRAINT company_address_city_id_fkey FOREIGN KEY (city_id) REFERENCES public.city(id);
+
+
+--
+-- Name: company_address company_address_company_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: testpsql_user
+--
+
+ALTER TABLE ONLY public.company_address
+    ADD CONSTRAINT company_address_company_id_fkey FOREIGN KEY (company_id) REFERENCES public.company(id);
+
+
+--
+-- Name: company_address company_address_country_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: testpsql_user
+--
+
+ALTER TABLE ONLY public.company_address
+    ADD CONSTRAINT company_address_country_id_fkey FOREIGN KEY (country_id) REFERENCES public.country(id);
+
+
+--
+-- Name: company_address company_address_region_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: testpsql_user
+--
+
+ALTER TABLE ONLY public.company_address
+    ADD CONSTRAINT company_address_region_id_fkey FOREIGN KEY (region_id) REFERENCES public.region(id);
 
 
 --
@@ -928,19 +1116,43 @@ ALTER TABLE ONLY public.rol_user
 
 
 --
--- Name: rol_user rol_user_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: testpsql_user
+-- Name: rol_user rol_user_users_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: testpsql_user
 --
 
 ALTER TABLE ONLY public.rol_user
-    ADD CONSTRAINT rol_user_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id);
+    ADD CONSTRAINT rol_user_users_id_fkey FOREIGN KEY (users_id) REFERENCES public.users(id);
 
 
 --
--- Name: sucursal sucursal_address_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: testpsql_user
+-- Name: sucursal_address sucursal_address_city_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: testpsql_user
 --
 
-ALTER TABLE ONLY public.sucursal
-    ADD CONSTRAINT sucursal_address_id_fkey FOREIGN KEY (address_id) REFERENCES public.address(id);
+ALTER TABLE ONLY public.sucursal_address
+    ADD CONSTRAINT sucursal_address_city_id_fkey FOREIGN KEY (city_id) REFERENCES public.city(id);
+
+
+--
+-- Name: sucursal_address sucursal_address_country_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: testpsql_user
+--
+
+ALTER TABLE ONLY public.sucursal_address
+    ADD CONSTRAINT sucursal_address_country_id_fkey FOREIGN KEY (country_id) REFERENCES public.country(id);
+
+
+--
+-- Name: sucursal_address sucursal_address_region_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: testpsql_user
+--
+
+ALTER TABLE ONLY public.sucursal_address
+    ADD CONSTRAINT sucursal_address_region_id_fkey FOREIGN KEY (region_id) REFERENCES public.region(id);
+
+
+--
+-- Name: sucursal_address sucursal_address_sucursal_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: testpsql_user
+--
+
+ALTER TABLE ONLY public.sucursal_address
+    ADD CONSTRAINT sucursal_address_sucursal_id_fkey FOREIGN KEY (sucursal_id) REFERENCES public.sucursal(id);
 
 
 --
@@ -952,11 +1164,35 @@ ALTER TABLE ONLY public.sucursal
 
 
 --
--- Name: users users_address_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: testpsql_user
+-- Name: users_address users_address_city_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: testpsql_user
 --
 
-ALTER TABLE ONLY public.users
-    ADD CONSTRAINT users_address_id_fkey FOREIGN KEY (address_id) REFERENCES public.address(id);
+ALTER TABLE ONLY public.users_address
+    ADD CONSTRAINT users_address_city_id_fkey FOREIGN KEY (city_id) REFERENCES public.city(id);
+
+
+--
+-- Name: users_address users_address_country_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: testpsql_user
+--
+
+ALTER TABLE ONLY public.users_address
+    ADD CONSTRAINT users_address_country_id_fkey FOREIGN KEY (country_id) REFERENCES public.country(id);
+
+
+--
+-- Name: users_address users_address_region_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: testpsql_user
+--
+
+ALTER TABLE ONLY public.users_address
+    ADD CONSTRAINT users_address_region_id_fkey FOREIGN KEY (region_id) REFERENCES public.region(id);
+
+
+--
+-- Name: users_address users_address_users_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: testpsql_user
+--
+
+ALTER TABLE ONLY public.users_address
+    ADD CONSTRAINT users_address_users_id_fkey FOREIGN KEY (users_id) REFERENCES public.users(id);
 
 
 --
