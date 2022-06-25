@@ -1,6 +1,6 @@
 import { GraphQLBoolean, GraphQLInt, GraphQLNonNull, GraphQLString } from "graphql";
 import {intranetQueryCtl, inputDataType} from '../../../db/intranetCtl';
-import {comparePassword,encPassword} from '../../../utils/tools';
+import {comparePassword,encPassword} from '../../../services/utils/tools';
 const {     
     EeType,
     MainOfficeType,

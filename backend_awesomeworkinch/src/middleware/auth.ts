@@ -1,5 +1,5 @@
 import {Request,Response,NextFunction} from 'express';
-import {validateToken} from '../utils/tools';
+import {validateToken} from '../services/utils/tools';
 
 
 export const usersAuthenticate = (req:Request, res:Response, next:NextFunction) => {

@@ -1,7 +1,7 @@
 import { GraphQLBoolean, GraphQLInt, GraphQLList, GraphQLNonNull, GraphQLString } from "graphql";
 import {intranetQueryCtl, inputDataType} from '../../db/intranetCtl';
 const { IntranetUserType, UserAddressType } = require("../types");
-import {comparePassword,encPassword} from '../../utils/tools';
+import {comparePassword,encPassword} from '../../services/utils/tools';
 
 const addIntranetUser = {
     type: new GraphQLList(IntranetUserType),

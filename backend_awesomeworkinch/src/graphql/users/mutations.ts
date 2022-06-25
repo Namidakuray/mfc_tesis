@@ -1,6 +1,6 @@
 import { GraphQLBoolean, GraphQLInt, GraphQLNonNull, GraphQLString } from "graphql";
 import {studentQueryCtl, inputDataType} from '../../db/usersCtl';
-import {comparePassword,encPassword, validateToken} from '../../utils/tools';
+import {comparePassword,encPassword, validateToken} from '../../services/utils/tools';
 const {     
     StudentFederationType,
     StudentCenterType,

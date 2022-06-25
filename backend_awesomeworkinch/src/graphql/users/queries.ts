@@ -1,7 +1,7 @@
 import { GraphQLInt, GraphQLList, GraphQLNonNull, GraphQLString } from "graphql";
 import { intranetQueryCtl } from "../../db/intranetCtl";
 import {studentQueryCtl, inputDataType} from '../../db/usersCtl';
-import { comparePassword, generateToken } from "../../utils/tools";
+import { comparePassword, generateToken } from "../../services/utils/tools";
 const {     
     EeType,
     MainOfficeType,
