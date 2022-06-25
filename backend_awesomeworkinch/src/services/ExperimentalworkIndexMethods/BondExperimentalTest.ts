@@ -108,10 +108,26 @@ class BondExperimentalTest extends InitialWorkIndex{
 }
 
 
-let samples: samplesType = [59, 298, 373, 156, 230, 91]
-let roTapSet: roTapSetType = [12500, 9500, 6300, 4750, 2800, 1700]
-let test = new BondExperimentalTest(samples,roTapSet,418);
-console.log(test.firstCiclePercents);
-console.log(test.firstFeed80);
-console.log(test.predictWorkPerShortTonWithWorkIndex(15,410000,240000));
-console.log(test.predictWorkPerShortTonWithWorkIndex(15,410000,4000));
+let samples_Material_mineria_OpSeparaciónYConcentración_Material_clase312_Set01: samplesType = [59, 298, 373, 156, 230, 91]
+let roTapSet_Material_mineria_OpSeparaciónYConcentración_Material_clase312_Set01: roTapSetType = [12500, 9500, 6300, 4750, 2800, 1700]
+let test_01 = new BondExperimentalTest(samples_Material_mineria_OpSeparaciónYConcentración_Material_clase312_Set01,roTapSet_Material_mineria_OpSeparaciónYConcentración_Material_clase312_Set01,418);
+console.log("test_01:[%retenido]y[%pasante]",test_01.firstCiclePercents);
+console.log("test_01:P80Calculado_set01",test_01.firstFeed80);
+
+let samples_Material_mineria_OpSeparaciónYConcentración_Material_clase312_Set02: samplesType = [8, 96, 96, 26, 30, 30, 40]
+let roTapSet_Material_mineria_OpSeparaciónYConcentración_Material_clase312_Set02: roTapSetType = [1700, 850, 300, 212, 150, 106, 75]
+let percentPass_set02=test_01.percentCalculate(samples_Material_mineria_OpSeparaciónYConcentración_Material_clase312_Set02,88);
+console.log("test_01:[%retenido]y[%pasante]",percentPass_set02);
+console.log("test_01:P80Calculado_set02",test_01.percent80Calculate(percentPass_set02[1],roTapSet_Material_mineria_OpSeparaciónYConcentración_Material_clase312_Set02));
+
+console.log("test_01:WorkIndex_AyudantiaSet01",test_01.predictWorkPerShortTonWithWorkIndex(15,410000,240000));
+console.log("test_01:WorkIndex_AyudantiaSet02",test_01.predictWorkPerShortTonWithWorkIndex(15,410000,4000));
+
+let samples_Material_mineria_OpSeparaciónYConcentración_Material_datosAnalisisGranulométricoDeEjemploSolemne01: samplesType = [810, 2070, 2910, 3780, 2850, 1740, 1770, 1500, 1140, 1140, 1050, 840, 720, 420, 720, 540];
+let roTapSet_Material_mineria_OpSeparaciónYConcentración_Material_datosAnalisisGranulométricoDeEjemploSolemne01: roTapSetType = [13200, 9500, 6730, 4760, 3360, 2380, 1680, 1190, 841, 595, 420, 297, 210, 149, 105, 74];
+let test_02 = new BondExperimentalTest(samples_Material_mineria_OpSeparaciónYConcentración_Material_datosAnalisisGranulométricoDeEjemploSolemne01,roTapSet_Material_mineria_OpSeparaciónYConcentración_Material_datosAnalisisGranulométricoDeEjemploSolemne01,6000);
+console.log("test_02:[%retenido]y[%pasante]",test_02.firstCiclePercents);
+console.log("test_02:P80Calculado",test_02.firstFeed80);
+
+console.log("test_02:WorkIndex",test_02.predictWorkPerShortTonWithWorkIndex(15.0406494005555,6957.9,3360));
+console.log("test_02:ExcelWorkIndex",test_02.predictWorkPerShortTonWithWorkIndex(15.0406494005555,6730,3360));

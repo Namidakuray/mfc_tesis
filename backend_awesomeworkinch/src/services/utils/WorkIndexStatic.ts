@@ -20,7 +20,10 @@ export class InitialWorkIndex {
         this.firstFeed80 = this.percent80Calculate();
     }
 
-    percentCalculate(sample:samplesType=this.firstSamples,background?:number|null):[percentRetenidoType,percentPasanteType]{
+    percentCalculate(
+        sample:samplesType=this.firstSamples,
+        background?:number
+        ):[percentRetenidoType,percentPasanteType]{
         let totalMass:number;
         if(background!=undefined){
             totalMass = sample.reduce((a,b)=>a+b) + background;
@@ -30,7 +33,7 @@ export class InitialWorkIndex {
         if(this.firstSamples.length<=0){
             throw new Error("Samples must have at least 1 point");
         };
-        let percentRetenido: percentRetenidoType = this.firstSamples.map(x=>{return x/totalMass});
+        let percentRetenido: percentRetenidoType = sample.map(x=>{return x/totalMass});
         let percentPasante: percentPasanteType = [];
         percentRetenido.forEach((x,i)=>{
             let temp;
@@ -44,7 +47,10 @@ export class InitialWorkIndex {
         );
         return [percentRetenido,percentPasante];
     }
-    percent80Calculate(percentPasante:percentPasanteType=this.firstCiclePercents[1],roTapSet:roTapSetType=this.roTapSet): number {
+    percent80Calculate(
+        percentPasante:percentPasanteType=this.firstCiclePercents[1],
+        roTapSet:roTapSetType=this.roTapSet
+        ): number {
         let data:[DataPoint]=[[0,0]];
         if(percentPasante.length!==roTapSet.length){
             throw new Error("Samples and ROTapSet must be the same length");
@@ -62,17 +68,28 @@ export class InitialWorkIndex {
             return p80[1];
         };
     }
-    circulatingLoadCalculate(coarseFractionProd:number,fineFractionProd:number): number {        
+    circulatingLoadCalculate(
+        coarseFractionProd:number,
+        fineFractionProd:number
+        ): number {        
         return coarseFractionProd/fineFractionProd;
     }
     //British Chemical Engineering - Freed Bond - ecuation (1a)
-    theoricWorkIndexCalculate(totalMillWork:number,P80:number,F80:number): number {
+    theoricWorkIndexCalculate(
+        totalMillWork:number,
+        P80:number,
+        F80:number
+        ): number {
         let squarerootP80 = Math.sqrt(P80);
         let squarerootF80 = Math.sqrt(F80);
         return totalMillWork/((10/squarerootP80)-(10/squarerootF80));
     }
     //British Chemical Engineering - Freed Bond - ecuation (1b)
-    theoricProductSizeCalculate(workIndex:number,totalMillWork:number,F80:number): number {
+    theoricProductSizeCalculate(
+        workIndex:number,
+        totalMillWork:number,
+        F80:number
+        ): number {
         let squarerootF80 = Math.sqrt(F80);
         let dividend = 10*workIndex*squarerootF80;
         let divisor = (totalMillWork*squarerootF80)+(10*workIndex);
